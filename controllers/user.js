@@ -70,8 +70,13 @@ const controllerDELETE = async(req, res = response) => {
 
     const userDeleted = await User.findByIdAndUpdate( id, { status: false } )
 
+    const uid = req.uid
+    const userAuth = req.user
+
     res.json({
-        userDeleted
+        userDeleted,
+        uid,
+        userAuth
     })
 }
 

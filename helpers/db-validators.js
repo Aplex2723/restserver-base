@@ -1,5 +1,7 @@
 const Role = require('../models/roles')
 const Users = require('../models/users')
+const Category = require('../models/category');
+const Product = require('../models/product');
 const mongoose = require('mongoose')
 
 const roleExist = async( role = '' ) => {
@@ -36,9 +38,50 @@ const validateEmail = async( email ) =>{
     }
 }
 
+// Categories middlewares for validate if exist
+const categoryIdExist = async( id ) => {
+    if( !mongoose.Types.ObjectId.isValid(id)){
+        throw new Error('This is not a valid Mongoose ID');
+    }
+
+    const existID = await Category.findById(id);
+    if(!existID){
+        throw new Error(`Category with ID: ${id} does not exist`);
+    }
+    
+}
+
+// Products middlewares for validate if exist
+const productIdExist = async( id ) => {
+    if( !mongoose.Types.ObjectId.isValid(id)){
+        throw new Error('This is not a valid Mongoose ID');
+    }
+
+    const existID = await Product.findById(id);
+    if(!existID){
+        throw new Error(`Product with ID: ${id} does not exist`);
+    }
+    
+}
+
+//  Validate allowed collections
+const allowedCollectionsHelper = (collection = '', collections = []) => {
+
+    const include = collections.includes(collection);
+
+    if(!include){
+        throw new Error(`The collection ${collection} is not allowed, ${collections}`);
+    }
+
+    return true;
+
+}
 
 module.exports = {
     roleExist,
     validateEmail,
     idExist,
+    categoryIdExist,
+    productIdExist,
+    allowedCollectionsHelper
 }

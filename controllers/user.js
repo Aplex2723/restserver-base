@@ -38,7 +38,7 @@ const controllerPUT = async(req, res = response) => {
 
     }
 
-    const users = await Users.findByIdAndUpdate( id, rest );
+    const users = await User.findByIdAndUpdate( id, rest );
 
     res.json({
         msg: "put JSON - controller",

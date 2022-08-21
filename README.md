@@ -3,7 +3,7 @@
 Template for any use in REST Server.
 This base is for any use, it implements some characteristics like:
 
-- Create a user and save it in the MongooseDB
+- Create a user and save it in the MongoDB
 - Everytime the user log-in a JWT is generated for authentication
 - Create, Save, Update and Disable a user, some of this operation the user needs the role ADMIN_ROLE
 - Google Authentication, saving the data in our MongooseDB for future logins
